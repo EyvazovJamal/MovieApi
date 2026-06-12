@@ -1,0 +1,11 @@
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\bin\Debug\net9.0\SharedKernel.deps.json
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\bin\Debug\net9.0\SharedKernel.dll
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\bin\Debug\net9.0\SharedKernel.pdb
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\SharedKernel.AssemblyInfoInputs.cache
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\SharedKernel.AssemblyInfo.cs
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\SharedKernel.csproj.CoreCompileInputs.cache
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\SharedKernel.dll
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\refint\SharedKernel.dll
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\SharedKernel.pdb
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\ref\SharedKernel.dll
