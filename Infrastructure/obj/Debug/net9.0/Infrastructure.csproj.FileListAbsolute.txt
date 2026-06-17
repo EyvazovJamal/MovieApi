@@ -17,3 +17,4 @@ C:\Users\Jenovo\Documents\StepCinema\MovieApi\Infrastructure\obj\Debug\net9.0\In
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\Infrastructure\obj\Debug\net9.0\refint\Infrastructure.dll
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\Infrastructure\obj\Debug\net9.0\Infrastructure.pdb
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\Infrastructure\obj\Debug\net9.0\ref\Infrastructure.dll
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\Infrastructure\obj\Debug\net9.0\Infrastructure.sourcelink.json

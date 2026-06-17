@@ -1,6 +1,8 @@
 using Application;
+using Application.Hall;
 using Application.Movie;
 using Domain.Movie;
+using Infrastructure.Hall;
 using Infrastructure.Movie;
 using Marten;
 using Marten.Events.Projections;
@@ -16,7 +18,8 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<IM
 builder.Services.AddMarten(options =>
 {
     options.Connection(Environment.GetEnvironmentVariable("MARTEN_CONNECTION_STRING"));
-    options.Projections.Add<MovieSingleStreamProjector>(ProjectionLifecycle.Inline);})
+    options.Projections.Add<MovieSingleStreamProjector>(ProjectionLifecycle.Inline);
+        options.Projections.Add<HallSingleStreamProjector>(ProjectionLifecycle.Inline);})
 .UseLightweightSessions();
 
 builder.Services.AddRefitClient<ITmdbApi>()
@@ -30,6 +33,7 @@ builder.Services.AddRefitClient<ITmdbApi>()
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer",Environment.GetEnvironmentVariable("TMDB_TOKEN") );
     });
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IHallRepository, HallRepository>();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

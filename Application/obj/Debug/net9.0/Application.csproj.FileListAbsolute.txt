@@ -15,3 +15,4 @@ C:\Users\Jenovo\Documents\StepCinema\MovieApi\Application\bin\Debug\net9.0\Share
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\Application\bin\Debug\net9.0\Domain.pdb
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\Application\bin\Debug\net9.0\SharedKernel.pdb
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\Application\obj\Debug\net9.0\Applicat.44B5EDA2.Up2Date
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\Application\obj\Debug\net9.0\Application.sourcelink.json

@@ -9,3 +9,4 @@ C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\Shar
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\refint\SharedKernel.dll
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\SharedKernel.pdb
 C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\ref\SharedKernel.dll
+C:\Users\Jenovo\Documents\StepCinema\MovieApi\SharedKernel\obj\Debug\net9.0\SharedKernel.sourcelink.json

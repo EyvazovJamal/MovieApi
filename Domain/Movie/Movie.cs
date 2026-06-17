@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using Domain.Common;
 using Marten.Events.CodeGeneration;
 using SharedKernel.Contracts;
@@ -18,12 +18,13 @@ public class Movie :AggregateRoot
     public DateTimeOffset? ReleaseDate { get; private set; }
     public double VoteAverage { get; private set; }
     public int VoteCount { get; private set; }
+    public int Runtime { get;private set; }
     
     [JsonConstructor]
     internal Movie(Guid id,
         bool adult, string? backdropPath, string title, string originalLanguage, 
         string originalTitle, string? overview, string? posterPath, 
-        DateTimeOffset? releaseDate, double voteAverage, int voteCount)
+        DateTimeOffset? releaseDate, double voteAverage, int voteCount,int runtime)
     {
         Id = id;
         Adult = adult;
@@ -36,11 +37,12 @@ public class Movie :AggregateRoot
         ReleaseDate = releaseDate;
         VoteAverage = voteAverage;
         VoteCount = voteCount;
+        Runtime = runtime;
     }
     private Movie(Guid id,
         bool adult, string? backdropPath, string title, string originalLanguage, 
         string originalTitle, string? overview, string? posterPath, 
-        DateTimeOffset? releaseDate, double voteAverage, int voteCount,bool? t)
+        DateTimeOffset? releaseDate, double voteAverage, int voteCount,int runtime,bool? t)
     
     {
         Id = id;
@@ -54,6 +56,7 @@ public class Movie :AggregateRoot
         ReleaseDate = releaseDate;
         VoteAverage = voteAverage;
         VoteCount = voteCount;
+        Runtime = runtime;
 
         AddDomainEvent(new MovieAddedToCinemaEvent(id,
             adult,
@@ -65,20 +68,21 @@ public class Movie :AggregateRoot
             posterPath,
             releaseDate,
             voteAverage,
-            voteCount));
+            voteCount,
+            runtime));
     }
     [MartenIgnore]
     public static Movie Create(
         Guid id,
         bool adult, string? backdropPath, string title, string originalLanguage, 
         string originalTitle, string? overview, string? posterPath, 
-        DateTimeOffset? releaseDate, double voteAverage, int voteCount)
+        DateTimeOffset? releaseDate, double voteAverage, int voteCount,int runtime)
     {
         return new Movie(
             id,
             adult, backdropPath, title, originalLanguage, 
             originalTitle, overview, posterPath, releaseDate, 
-            voteAverage, voteCount,true
+            voteAverage, voteCount,runtime,true
         );
     }    
     public void Apply(MovieAddedToCinemaEvent @event)
@@ -109,6 +113,7 @@ public class Movie :AggregateRoot
         ReleaseDate = e.ReleaseDate;
         VoteAverage = e.VoteAverage;
         VoteCount = e.VoteCount;
+        Runtime = e.Runtime;
     }
 
 }

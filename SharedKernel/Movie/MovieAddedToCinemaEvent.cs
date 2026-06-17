@@ -13,5 +13,6 @@ public record MovieAddedToCinemaEvent(
     string? PosterPath,
     DateTimeOffset? ReleaseDate,
     double VoteAverage,
-    int VoteCount):IDomainEvent;
+    int VoteCount,
+    int Runtime):IDomainEvent;
 

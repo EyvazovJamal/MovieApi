@@ -23,7 +23,9 @@ public class AddMovieFromTmdbToCinemaCommandHandler
             posterPath: movieTmdb.poster_path,
             releaseDate: DateTimeOffset.UtcNow,
             voteAverage: movieTmdb.vote_average,
-            voteCount: movieTmdb.vote_count
+            voteCount: movieTmdb.vote_count,
+            runtime: movieTmdb.runtime
+            
         );
         await movieRepository.StoreAsync(movie);
     }
