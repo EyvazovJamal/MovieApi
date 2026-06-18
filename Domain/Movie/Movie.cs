@@ -8,6 +8,7 @@ namespace Domain.Movie;
 
 public class Movie :AggregateRoot
 {
+    public int TmdbId { get;private set; }
     public bool Adult { get; private set; }
     public string? BackdropPath { get; private set; }
     public string Title { get; private set; } = string.Empty;
@@ -21,12 +22,13 @@ public class Movie :AggregateRoot
     public int Runtime { get;private set; }
     
     [JsonConstructor]
-    internal Movie(Guid id,
+    internal Movie(Guid id,int tmdbId,
         bool adult, string? backdropPath, string title, string originalLanguage, 
         string originalTitle, string? overview, string? posterPath, 
         DateTimeOffset? releaseDate, double voteAverage, int voteCount,int runtime)
     {
         Id = id;
+        TmdbId = tmdbId;
         Adult = adult;
         BackdropPath = backdropPath;
         Title = title;
@@ -39,13 +41,14 @@ public class Movie :AggregateRoot
         VoteCount = voteCount;
         Runtime = runtime;
     }
-    private Movie(Guid id,
+    private Movie(Guid id,int tmdbId,
         bool adult, string? backdropPath, string title, string originalLanguage, 
         string originalTitle, string? overview, string? posterPath, 
         DateTimeOffset? releaseDate, double voteAverage, int voteCount,int runtime,bool? t)
     
     {
         Id = id;
+        TmdbId = tmdbId;
         Adult = adult;
         BackdropPath = backdropPath;
         Title = title;
@@ -58,7 +61,7 @@ public class Movie :AggregateRoot
         VoteCount = voteCount;
         Runtime = runtime;
 
-        AddDomainEvent(new MovieAddedToCinemaEvent(id,
+        AddDomainEvent(new MovieAddedToCinemaEvent(id,tmdbId,
             adult,
             backdropPath,
             title,
@@ -73,13 +76,13 @@ public class Movie :AggregateRoot
     }
     [MartenIgnore]
     public static Movie Create(
-        Guid id,
+        Guid id,int tmdbId,
         bool adult, string? backdropPath, string title, string originalLanguage, 
         string originalTitle, string? overview, string? posterPath, 
         DateTimeOffset? releaseDate, double voteAverage, int voteCount,int runtime)
     {
         return new Movie(
-            id,
+            id,tmdbId,
             adult, backdropPath, title, originalLanguage, 
             originalTitle, overview, posterPath, releaseDate, 
             voteAverage, voteCount,runtime,true
@@ -103,6 +106,7 @@ public class Movie :AggregateRoot
     private void InternalApply(MovieAddedToCinemaEvent e)
     {
         Id = e.MovieId;
+        TmdbId = e.TmdbId;
         Adult = e.Adult;
         BackdropPath = e.BackdropPath;
         Title = e.Title;

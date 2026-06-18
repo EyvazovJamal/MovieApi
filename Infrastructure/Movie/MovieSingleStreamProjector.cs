@@ -12,7 +12,7 @@ public class MovieSingleStreamProjector : SingleStreamProjection<Domain.Movie.Mo
 
     public static Domain.Movie.Movie Create(MovieAddedToCinemaEvent e)
     {
-        return Domain.Movie.Movie.Create(e.MovieId,e.Adult,e.BackdropPath,e.Title,e.OriginalLanguage,
+        return Domain.Movie.Movie.Create(e.MovieId,e.TmdbId,e.Adult,e.BackdropPath,e.Title,e.OriginalLanguage,
             e.OriginalTitle,e.Overview,e.PosterPath,e.ReleaseDate,e.VoteAverage,e.VoteCount,e.Runtime);
     }
 }

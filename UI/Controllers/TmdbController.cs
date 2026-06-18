@@ -19,9 +19,15 @@ public class TmdbController(IMediator mediator) : ControllerBase
     [HttpPost("addToCinema")]
     public async Task<IActionResult> AddMovieFromTmdbToCinema([FromBody] int id)
     {
-        var command = new AddMovieFromTmdbToCinemaCommand(id);
-        await mediator.Send(command);
-        return Ok();
+        try
+        {
+            await mediator.Send(new AddMovieFromTmdbToCinemaCommand(id));
+            return Ok();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(ex.Message);
+        }
     }
     
     

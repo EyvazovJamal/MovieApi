@@ -4,6 +4,7 @@ namespace SharedKernel.Movie;
 
 public record MovieAddedToCinemaEvent(
     Guid MovieId,
+    int TmdbId,
     bool Adult,
     string? BackdropPath,
     string Title,

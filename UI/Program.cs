@@ -1,9 +1,11 @@
 using Application;
 using Application.Hall;
 using Application.Movie;
+using Application.Screening;
 using Domain.Movie;
 using Infrastructure.Hall;
 using Infrastructure.Movie;
+using Infrastructure.Screening;
 using Marten;
 using Marten.Events.Projections;
 using MovieApi.Application.Api;
@@ -19,7 +21,8 @@ builder.Services.AddMarten(options =>
 {
     options.Connection(Environment.GetEnvironmentVariable("MARTEN_CONNECTION_STRING"));
     options.Projections.Add<MovieSingleStreamProjector>(ProjectionLifecycle.Inline);
-        options.Projections.Add<HallSingleStreamProjector>(ProjectionLifecycle.Inline);})
+        options.Projections.Add<HallSingleStreamProjector>(ProjectionLifecycle.Inline);
+        options.Projections.Add<ScreeningSingleStreamProjector>(ProjectionLifecycle.Inline);})
 .UseLightweightSessions();
 
 builder.Services.AddRefitClient<ITmdbApi>()
@@ -34,6 +37,7 @@ builder.Services.AddRefitClient<ITmdbApi>()
     });
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IHallRepository, HallRepository>();
+builder.Services.AddScoped<IScreeningRepository, ScreeningRepository>();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

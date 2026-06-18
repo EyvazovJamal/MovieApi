@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using Domain.Common;
 using Marten.Events.CodeGeneration;
 using SharedKernel.Contracts;
@@ -49,7 +49,7 @@ public class Hall : AggregateRoot
             name,
             seatCount,
             true);
-    }
+    }   
 
     public void Apply(HallCreatedEvent @event)
     {

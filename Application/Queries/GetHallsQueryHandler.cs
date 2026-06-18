@@ -19,6 +19,7 @@ public class GetHallsQueryHandler(IDocumentStore store):IRequestHandler<GetHalls
         var halls = await query.ToListAsync(cancellationToken);
         return halls.Select(h => new HallDto
         {
+            Id = h.Id,
             Name=h.Name,
             SeatCount=h.SeatCount,
         }).ToList();
