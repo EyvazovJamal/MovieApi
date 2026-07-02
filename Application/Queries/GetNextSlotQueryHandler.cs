@@ -1,10 +1,11 @@
+using Application.Common;
 using Application.Screening.Dtos;
 using Marten;
 using MediatR;
 
 namespace Application.Queries;
 
-public class GetNextSlotQueryHandler(IDocumentStore store)
+public class GetNextSlotQueryHandler(IDocumentStore store, ICinemaTime cinemaTime)
     : IRequestHandler<GetNextSlotQuery, NextSlotDto>
 {
     private static readonly TimeOnly DayOpenTime = new(9, 0);
@@ -17,8 +18,8 @@ public class GetNextSlotQueryHandler(IDocumentStore store)
         if (hall is null)
             throw new InvalidOperationException("Hall not found");
 
-        var dayStart = request.Date.ToDateTime(DayOpenTime, DateTimeKind.Utc);
-        var dayEnd = dayStart.AddDays(1);
+        var dayStart = cinemaTime.DayStart(request.Date, DayOpenTime);
+        var dayEnd = cinemaTime.DayEnd(request.Date, DayOpenTime);
 
         var screenings = await session.Query<Domain.Screening.Screening>()
             .Where(s => s.HallId == request.HallId)

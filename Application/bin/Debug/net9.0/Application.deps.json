@@ -11,6 +11,7 @@
           "Domain": "1.0.0",
           "Marten": "7.40.5",
           "MediatR": "12.4.1",
+          "Microsoft.Extensions.Options": "9.0.0",
           "Refit.HttpClientFactory": "8.0.0"
         },
         "runtime": {

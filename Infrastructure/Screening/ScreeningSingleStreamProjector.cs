@@ -1,4 +1,5 @@
 using Marten.Events.Aggregation;
+using SharedKernel.Screening;
 
 namespace Infrastructure.Screening;
 
@@ -7,6 +8,8 @@ public class ScreeningSingleStreamProjector : SingleStreamProjection<Domain.Scre
     public ScreeningSingleStreamProjector()
     {
         IncludeType<ScreeningCreatedEvent>();
+        IncludeType<ScreeningDeletedEvent>();
+        DeleteEvent<ScreeningDeletedEvent>();
     }
 
     public static Domain.Screening.Screening Create(ScreeningCreatedEvent e)
@@ -19,4 +22,5 @@ public class ScreeningSingleStreamProjector : SingleStreamProjection<Domain.Scre
             e.EndTime,
             e.Runtime);
     }
+    
 }

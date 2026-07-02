@@ -53,4 +53,42 @@ public class ScreeningController(IMediator mediator) : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+    [HttpPost("delete")]
+    public async Task<IActionResult> Delete([FromBody]Guid screeningId)
+    {
+        try
+        {
+            await mediator.Send(new DeleteScreeningCommand(screeningId));
+            return Ok();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
+
+    [HttpGet("repeat-preview")]
+    public async Task<IActionResult> GetRepeatPreview([FromQuery] DateOnly targetDate)
+    {
+        var result = await mediator.Send(new GetRepeatScreeningsPreviewQuery(targetDate));
+        return Ok(result);
+    }
+
+    [HttpPost("repeat-from-date")]
+    public async Task<IActionResult> RepeatFromDate(RepeatScreeningsRequest request)
+    {
+        try
+        {
+            var result = await mediator.Send(new RepeatScreeningsFromDateCommand(request.TargetDate));
+            return Ok(result);
+        }
+        catch (BusinessRuleValidationException ex)
+        {
+            return Conflict(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }

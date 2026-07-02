@@ -15,7 +15,7 @@ public class HallController(
     [HttpPost("create")]
     public async Task<IActionResult> CreateHall(CreateHallRequest request)
     {
-        var command= new CreateHallCommand(request.Name, request.SeatCount);
+        var command = new CreateHallCommand(request.Name, request.Seats);
         await mediator.Send(command);
         return Ok();
     }

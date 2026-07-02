@@ -1,10 +1,11 @@
+using Application.Common;
 using Application.Screening.Dtos;
 using Marten;
 using MediatR;
 
 namespace Application.Queries;
 
-public class GetScreeningsByDateQueryHandler(IDocumentStore store)
+public class GetScreeningsByDateQueryHandler(IDocumentStore store, ICinemaTime cinemaTime)
     : IRequestHandler<GetScreeningsByDateQuery, List<ScreeningDto>>
 {
     public async Task<List<ScreeningDto>> Handle(
@@ -13,8 +14,8 @@ public class GetScreeningsByDateQueryHandler(IDocumentStore store)
     {
         await using var session = store.QuerySession();
 
-        var dayStart = request.Date.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
-        var dayEnd = dayStart.AddDays(1);
+        var dayStart = cinemaTime.DayStart(request.Date);
+        var dayEnd = cinemaTime.DayEnd(request.Date);
 
         var screenings = await session.Query<Domain.Screening.Screening>()
             .Where(s => s.StartTime >= dayStart && s.StartTime < dayEnd)

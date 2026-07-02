@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using Domain.Common;
 using Marten.Events.CodeGeneration;
 using SharedKernel.Contracts;
+using SharedKernel.Screening;
 
 namespace Domain.Screening;
 
@@ -113,5 +114,10 @@ public class Screening : AggregateRoot
         var occupiedEndA = endA.AddMinutes(BufferMinutes);
         var occupiedEndB = endB.AddMinutes(BufferMinutes);
         return startA < occupiedEndB && occupiedEndA > startB;
+    }
+
+    public void Delete()
+    {
+        AddDomainEvent(new ScreeningDeletedEvent(Id));
     }
 }

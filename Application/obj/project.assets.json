@@ -4347,6 +4347,7 @@
       "Domain >= 1.0.0",
       "Marten >= 7.40.5",
       "MediatR >= 12.4.1",
+      "Microsoft.Extensions.Options >= 9.0.0",
       "Refit.HttpClientFactory >= 8.0.0"
     ]
   },
@@ -4404,6 +4405,10 @@
           "MediatR": {
             "target": "Package",
             "version": "[12.4.1, )"
+          },
+          "Microsoft.Extensions.Options": {
+            "target": "Package",
+            "version": "[9.0.0, )"
           },
           "Refit.HttpClientFactory": {
             "target": "Package",

@@ -4,5 +4,5 @@ public class CreateHallRequest
 {
     public required string Name { get; set; }
 
-    public int SeatCount { get; set; }
+    public int Seats { get; set; }
 }

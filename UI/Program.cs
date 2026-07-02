@@ -1,4 +1,5 @@
 using Application;
+using Application.Common;
 using Application.Hall;
 using Application.Movie;
 using Application.Screening;
@@ -16,6 +17,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 DotNetEnv.Env.Load();
+builder.Services.Configure<CinemaSettings>(builder.Configuration.GetSection(CinemaSettings.SectionName));
+builder.Services.AddSingleton<ICinemaTime, CinemaTimeService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<IMarkerAssembly>());
 builder.Services.AddMarten(options =>
 {
