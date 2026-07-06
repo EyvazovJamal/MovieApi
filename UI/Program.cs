@@ -7,7 +7,9 @@ using Domain.Movie;
 using Infrastructure.Hall;
 using Infrastructure.Movie;
 using Application.Booking;
+using Application.Notifications;
 using Infrastructure.Booking;
+using Infrastructure.Notifications;
 using Infrastructure.Screening;
 using Marten;
 using Marten.Events.Projections;
@@ -41,10 +43,17 @@ builder.Services.AddRefitClient<ITmdbApi>()
         c.DefaultRequestHeaders.Authorization = 
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer",Environment.GetEnvironmentVariable("TMDB_TOKEN") );
     });
+builder.Services.Configure<TelegramSettings>(o =>
+{
+    o.BotToken = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN") ?? "";
+    o.ChatId = Environment.GetEnvironmentVariable("TELEGRAM_CHAT_ID") ?? "";
+    o.Enabled = !string.IsNullOrEmpty(o.BotToken);
+});
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IHallRepository, HallRepository>();
 builder.Services.AddScoped<IScreeningRepository, ScreeningRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddHttpClient<ITelegramNotifier, TelegramNotifier>();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

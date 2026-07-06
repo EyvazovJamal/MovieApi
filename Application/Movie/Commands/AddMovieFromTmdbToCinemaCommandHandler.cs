@@ -1,3 +1,4 @@
+using Application.Notifications;
 using MediatR;
 using MovieApi.Application.Api;
 using Domain.Movie;
@@ -8,7 +9,8 @@ namespace Application.Movie.Commands;
 public class AddMovieFromTmdbToCinemaCommandHandler
     (ITmdbApi tmdbApi,
         IMovieRepository movieRepository,
-        IDocumentStore store)
+        IDocumentStore store,
+        ITelegramNotifier telegram)
     : IRequestHandler<AddMovieFromTmdbToCinemaCommand>
 {
     public async Task Handle(AddMovieFromTmdbToCinemaCommand request, CancellationToken cancellationToken)
@@ -38,5 +40,11 @@ public class AddMovieFromTmdbToCinemaCommandHandler
             
         );
         await movieRepository.StoreAsync(movie);
+        await telegram.NotifyMovieAddedToCinemaAsync(
+            movieTmdb.title,
+            movieTmdb.poster_path,
+            movieTmdb.vote_average,
+            movieTmdb.runtime,
+            cancellationToken);
     }
 }
