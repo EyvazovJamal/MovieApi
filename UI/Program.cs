@@ -6,6 +6,8 @@ using Application.Screening;
 using Domain.Movie;
 using Infrastructure.Hall;
 using Infrastructure.Movie;
+using Application.Booking;
+using Infrastructure.Booking;
 using Infrastructure.Screening;
 using Marten;
 using Marten.Events.Projections;
@@ -25,7 +27,8 @@ builder.Services.AddMarten(options =>
     options.Connection(Environment.GetEnvironmentVariable("MARTEN_CONNECTION_STRING"));
     options.Projections.Add<MovieSingleStreamProjector>(ProjectionLifecycle.Inline);
         options.Projections.Add<HallSingleStreamProjector>(ProjectionLifecycle.Inline);
-        options.Projections.Add<ScreeningSingleStreamProjector>(ProjectionLifecycle.Inline);})
+        options.Projections.Add<ScreeningSingleStreamProjector>(ProjectionLifecycle.Inline);
+        options.Projections.Add<BookingSingleStreamProjector>(ProjectionLifecycle.Inline);})
 .UseLightweightSessions();
 
 builder.Services.AddRefitClient<ITmdbApi>()
@@ -41,6 +44,7 @@ builder.Services.AddRefitClient<ITmdbApi>()
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IHallRepository, HallRepository>();
 builder.Services.AddScoped<IScreeningRepository, ScreeningRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

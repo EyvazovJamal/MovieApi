@@ -33,6 +33,13 @@ public class ScreeningController(IMediator mediator) : ControllerBase
         }
     }
 
+    [HttpGet("{id:guid}/seat-map")]
+    public async Task<IActionResult> GetSeatMap(Guid id)
+    {
+        var result = await mediator.Send(new GetSeatMapQuery(id));
+        return result is null ? NotFound() : Ok(result);
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetByDate([FromQuery] DateOnly date)
     {
